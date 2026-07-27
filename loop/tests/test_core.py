@@ -151,6 +151,22 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(state.reason, "time limit reached")
         self.assertLess(time.monotonic() - started, 0.8)
 
+    def test_runner_can_constrain_child_environment(self):
+        marker = "LOOP_TEST_ENV"
+        value = Config(
+            goal="make it pass",
+            executor=("true",),
+            verifier=("python3", "-c",
+                      f'import os; assert os.getenv("{marker}") == "allowed"; '
+                      'print("LOOP_VERDICT: PASS")'),
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            state = Runner(
+                value, Path(directory),
+                env={"PATH": os.environ["PATH"], marker: "allowed"},
+            ).run()
+        self.assertEqual(state.status, "PASSED")
+
 
 if __name__ == "__main__":
     unittest.main()

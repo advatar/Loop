@@ -3,6 +3,12 @@
 All notable changes to Loop will be documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+- Allow trusted embedding runtimes such as Acme to supply a constrained child
+  process environment.
+- Document the implemented Acme `LoopWorker` integration and governance boundary.
+
 ## 0.1.0 - 2026-07-22
 
 - Add the vendor-neutral `agent-loop` CLI and Python runner.

@@ -9,7 +9,7 @@ import uuid
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 
 class LoopError(RuntimeError):
@@ -106,9 +106,12 @@ def now() -> str:
 
 
 class Runner:
-    def __init__(self, config: Config, root: Path):
+    def __init__(
+        self, config: Config, root: Path, *, env: Mapping[str, str] | None = None
+    ):
         self.config = config
         self.root = root.resolve()
+        self.env = dict(env) if env is not None else None
         state_dir = Path(config.state_dir)
         self.state_dir = state_dir if state_dir.is_absolute() else self.root / state_dir
         self.state_path = self.state_dir / "state.json"
@@ -179,7 +182,7 @@ class Runner:
         try:
             return subprocess.run(
                 argv, cwd=self.root, text=True, capture_output=True,
-                timeout=timeout, check=False,
+                timeout=timeout, check=False, env=self.env,
             )
         except FileNotFoundError as exc:
             raise LoopError(f"executable not found: {argv[0]}") from exc
