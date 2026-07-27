@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "loop",
+  "displayName": "Loop",
+  "version": "0.1.0",
+  "description": "Run bounded, verifiable coding-agent loops with Codex, Claude, or any CLI agent.",
+  "author": { "name": "Advatar" },
+  "license": "Apache-2.0",
+  "keywords": ["agents", "automation", "verification", "codex", "claude"],
+  "skills": "./skills/"
+}

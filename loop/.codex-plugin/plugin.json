@@ -1,0 +1,22 @@
+{
+  "name": "loop",
+  "version": "0.1.0",
+  "description": "Run bounded, verifiable coding-agent loops with Codex, Claude, or any CLI agent.",
+  "author": { "name": "Advatar" },
+  "license": "Apache-2.0",
+  "keywords": ["agents", "automation", "verification", "codex", "claude"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Loop",
+    "shortDescription": "Bounded, verified coding-agent loops",
+    "longDescription": "Create, run, resume, and inspect autonomous coding loops with explicit verifiers and hard resource limits.",
+    "developerName": "Advatar",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": [
+      "Create a bounded loop for this repository.",
+      "Run the configured loop and report its result.",
+      "Inspect why the last loop stopped."
+    ]
+  }
+}
